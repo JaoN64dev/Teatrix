@@ -1,0 +1,21 @@
+<section class="card auth-card recovery">
+  <h1>🔑 Seu código de recuperação</h1>
+  <p>Se esquecer a senha, é com este código que você entra de novo. <strong>Ele só aparece agora</strong> — guarde num lugar seguro.</p>
+
+  <p class="recovery-code" id="recovery-code">{{code}}</p>
+
+  <div class="row">
+    <button class="btn" type="button" id="copy-code">Copiar</button>
+    <button class="btn" type="button" id="download-code">Baixar .txt</button>
+  </div>
+
+  <p class="muted small">Cada código vale uma vez: ao recuperar a senha, você recebe um novo. Dá para gerar outro a qualquer momento no seu perfil (os anteriores deixam de valer).</p>
+
+  <label class="vote-option">
+    <input type="checkbox" id="saved-code">
+    <span>Guardei o código</span>
+  </label>
+  <a class="btn btn-primary" id="continue" href="{{next}}" aria-disabled="true">Continuar</a>
+</section>
+
+<script src="/js/auth.js" defer></script>

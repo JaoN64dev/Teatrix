@@ -1,0 +1,41 @@
+<section class="card auth-card">
+  <h1>Recuperar senha</h1>
+  <p class="muted">Use o <strong>código de recuperação</strong> que apareceu quando você criou a conta (ex.: <code>K7QF-2MZP-9XHT</code>).</p>
+  <form method="post" action="/forgot" class="form" novalidate data-auth-form data-register>
+    <label>Usuário
+      <input name="username" value="{{old.username}}" autocomplete="username" autocapitalize="none" spellcheck="false"
+        required minlength="3" maxlength="20" pattern="[A-Za-z0-9]+" {{#unless old.username}}autofocus{{/unless}}>
+    </label>
+    <label>Código de recuperação
+      <input name="code" class="code-input" autocomplete="off" autocapitalize="characters" spellcheck="false"
+        required maxlength="30" placeholder="XXXX-XXXX-XXXX" data-recovery-code {{#if old.username}}autofocus{{/if}}>
+    </label>
+    <div class="field">
+      <label for="forgot-password">Nova senha</label>
+      <div class="password-field">
+        <input id="forgot-password" name="password" type="password" autocomplete="new-password" required minlength="8" maxlength="72">
+        <button class="btn btn-ghost btn-sm pw-toggle" type="button" aria-controls="forgot-password" aria-pressed="false">Mostrar</button>
+      </div>
+      <p class="caps-warning small" hidden>Caps Lock está ligado</p>
+    </div>
+    <div class="field">
+      <label for="forgot-confirm">Confirmar nova senha</label>
+      <div class="password-field">
+        <input id="forgot-confirm" name="confirm" type="password" autocomplete="new-password" required minlength="8" maxlength="72">
+        <button class="btn btn-ghost btn-sm pw-toggle" type="button" aria-controls="forgot-confirm" aria-pressed="false">Mostrar</button>
+      </div>
+    </div>
+
+    <ul class="checklist small" aria-live="polite">
+      <li data-rule="length">Senha com pelo menos 8 caracteres</li>
+      <li data-rule="different">Senha diferente do usuário</li>
+      <li data-rule="match">As duas senhas são iguais</li>
+    </ul>
+
+    <button class="btn btn-primary" type="submit">Trocar senha</button>
+  </form>
+  <p class="muted small">Perdeu o código também? Crie uma conta nova sem e-mail cadastrado, não há outro jeito de provar que a conta é sua.</p>
+  <p class="muted small"><a href="/login">← Voltar para o login</a></p>
+</section>
+
+<script src="/js/auth.js" defer></script>

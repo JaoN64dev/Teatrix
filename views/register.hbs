@@ -1,0 +1,37 @@
+<section class="card auth-card">
+  <h1>Criar conta</h1>
+  <p class="muted">Você começa com 50 moedas para gastar na loja.</p>
+  <form method="post" action="/register" class="form" novalidate data-auth-form data-register>
+    <label>Usuário
+      <input name="username" value="{{old.username}}" autocomplete="username" autocapitalize="none" spellcheck="false"
+        required minlength="3" maxlength="20" pattern="[A-Za-z0-9]+" autofocus>
+    </label>
+    <div class="field">
+      <label for="register-password">Senha</label>
+      <div class="password-field">
+        <input id="register-password" name="password" type="password" autocomplete="new-password" required minlength="8" maxlength="72">
+        <button class="btn btn-ghost btn-sm pw-toggle" type="button" aria-controls="register-password" aria-pressed="false">Mostrar</button>
+      </div>
+      <p class="caps-warning small" hidden>⚠️ Caps Lock está ligado</p>
+    </div>
+    <div class="field">
+      <label for="register-confirm">Confirmar senha</label>
+      <div class="password-field">
+        <input id="register-confirm" name="confirm" type="password" autocomplete="new-password" required minlength="8" maxlength="72">
+        <button class="btn btn-ghost btn-sm pw-toggle" type="button" aria-controls="register-confirm" aria-pressed="false">Mostrar</button>
+      </div>
+    </div>
+
+    <ul class="checklist small" aria-live="polite">
+      <li data-rule="username">Usuário com 3 a 20 letras ou números</li>
+      <li data-rule="length">Senha com pelo menos 8 caracteres</li>
+      <li data-rule="different">Senha diferente do usuário</li>
+      <li data-rule="match">As duas senhas são iguais</li>
+    </ul>
+
+    <button class="btn btn-primary" type="submit">Criar conta</button>
+  </form>
+  <p class="muted small">Já tem conta? <a href="/login">Entrar</a></p>
+</section>
+
+<script src="/js/auth.js" defer></script>

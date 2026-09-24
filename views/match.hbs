@@ -1,0 +1,43 @@
+<a class="muted small" href="/history">← Voltar ao histórico</a>
+<h1>Sala {{match.roomCode}}</h1>
+<p class="muted">{{formatDate match.endedAt}} · {{match.players}}</p>
+
+{{#if match.guessers.length}}
+  <p class="muted small"> Acertos de emoção:
+    {{#each match.guessers}}{{#if @index}} · {{/if}}{{#if guessWinner}}🏆 {{/if}}{{username}} ({{correctGuesses}}){{/each}}
+  </p>
+{{/if}}
+
+<div class="entries">
+  {{#each entries}}
+    <article class="card entry">
+      <header class="entry-head">
+        <h2>{{title}}</h2>
+        <div class="entry-badges">
+          {{#if scriptWinner}}<span class="badge">Melhor roteiro</span>{{/if}}
+          {{#if actingWinner}}<span class="badge"> Melhor atuação</span>{{/if}}
+        </div>
+      </header>
+      {{#if emotion}}<p class="emotion-tag">Emoção: {{emotion}}</p>{{/if}}
+      <p class="muted small">
+        Roteiro de <strong>{{authorName}}</strong> ({{scriptVotes}} votos) ·
+        Atuação de <strong>{{performerName}}</strong> ({{actingVotes}} votos)
+      </p>
+
+      {{#if media}}
+        {{#if (eq media.kind "video")}}
+          <video class="performance" src="/media/{{media.file}}" controls preload="metadata" playsinline></video>
+        {{else}}
+          <audio class="performance" src="/media/{{media.file}}" controls preload="metadata"></audio>
+        {{/if}}
+      {{else}}
+        <p class="empty">{{performerName}} não gravou nada.</p>
+      {{/if}}
+
+      <details>
+        <summary>Ler o roteiro</summary>
+        <div class="script-text">{{#if text}}{{text}}{{else}}(roteiro em branco){{/if}}</div>
+      </details>
+    </article>
+  {{/each}}
+</div>

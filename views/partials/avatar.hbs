@@ -1,0 +1,4 @@
+{{!-- Uso: {{> avatar item=<item avatar> size="sm|lg"}} — renderiza emoji ou PNG. --}}
+<span class="avatar{{#if size}} avatar-{{size}}{{/if}}"{{#if item.data.bg}} style="background: {{item.data.bg}}"{{/if}} aria-hidden="true">
+  {{~#if item.data.src}}<img src="{{item.data.src}}" alt="" loading="lazy">{{else}}{{item.data.emoji}}{{/if~}}
+</span>

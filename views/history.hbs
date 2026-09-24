@@ -1,0 +1,32 @@
+<h1>Histórico</h1>
+
+{{#if matches.length}}
+  <ul class="history-list">
+    {{#each matches}}
+      <li class="card history-item">
+        <div>
+          <strong>Sala {{roomCode}}</strong>
+          <span class="muted small">{{formatDate endedAt}}</span>
+          <p class="muted small">{{players}}</p>
+          {{#if scriptWinners}}<p class="small"> Melhor roteiro: <strong>{{scriptWinners}}</strong></p>{{/if}}
+          {{#if actingWinners}}<p class="small"> Melhor atuação: <strong>{{actingWinners}}</strong></p>{{/if}}
+          {{#if guessWinners}}<p class="small"> Melhor palpiteiro: <strong>{{guessWinners}}</strong></p>{{/if}}
+        </div>
+        <a class="btn btn-sm" href="/history/{{id}}">Rever</a>
+      </li>
+    {{/each}}
+  </ul>
+
+  {{#if (eq pages 1)}}{{else}}
+    <nav class="pagination">
+      {{#if prev}}<a class="btn btn-sm" href="/history?page={{prev}}">← Anterior</a>{{/if}}
+      <span class="muted small">Página {{page}} de {{pages}}</span>
+      {{#if next}}<a class="btn btn-sm" href="/history?page={{next}}">Próxima →</a>{{/if}}
+    </nav>
+  {{/if}}
+{{else}}
+  <section class="card center">
+    <p class="muted">Você ainda não jogou nenhuma partida.</p>
+    <a class="btn btn-primary" href="/">Jogar agora</a>
+  </section>
+{{/if}}

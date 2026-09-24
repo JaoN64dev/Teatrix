@@ -1,0 +1,200 @@
+<div class="local" id="local">
+  <section class="card room-main">
+    <div class="timer" id="timer" hidden><div class="timer-bar" id="timer-bar"></div></div>
+    <p class="step-label muted" id="step-label"></p>
+
+    <!-- Preparação -->
+    <div class="screen" data-screen="setup">
+      <h2>Modo local</h2>
+      <p class="muted small">Um único aparelho: cada jogador faz sua parte e passa para o próximo. Nada é enviado ao servidor — as gravações somem ao sair da página, e a partida não vale moedas nem vai para o histórico.</p>
+      <form class="form" id="setup-form">
+        <fieldset class="vote-group">
+          <legend>Jogadores <span class="muted small" id="player-count"></span></legend>
+          <div id="player-list"></div>
+          <div class="row">
+            <input id="player-name" maxlength="20" placeholder="Nome do jogador" autocomplete="off" aria-label="Nome do jogador">
+            <button class="btn" type="button" id="add-player">Adicionar</button>
+          </div>
+        </fieldset>
+        <div class="settings">
+          <label>Tempo para escrever (por jogador)
+            <select id="set-write">
+              <option value="60">1 min</option>
+              <option value="120">2 min</option>
+              <option value="180">3 min</option>
+              <option value="240" selected>4 min</option>
+              <option value="300">5 min</option>
+              <option value="420">7 min</option>
+              <option value="600">10 min</option>
+            </select>
+          </label>
+          <label>Tempo para ensaiar e gravar (por jogador)
+            <select id="set-perform">
+              <option value="30">30 s</option>
+              <option value="60">1 min</option>
+              <option value="90">1 min 30 s</option>
+              <option value="120" selected>2 min</option>
+              <option value="180">3 min</option>
+              <option value="240">4 min</option>
+              <option value="300">5 min</option>
+            </select>
+          </label>
+          <label>Emoção
+            <select id="set-emotion">
+              <option value="author">Escolhida pelo autor</option>
+              <option value="random">Sorteada para quem atua</option>
+            </select>
+          </label>
+        </div>
+        <p class="muted small" id="setup-hint"></p>
+        <button class="btn btn-primary" type="submit" id="setup-start">Começar partida</button>
+      </form>
+    </div>
+
+    <!-- Passar o aparelho -->
+    <div class="screen pass" data-screen="pass" hidden>
+      <p class="pass-icon" aria-hidden="true"></p>
+      <h2>Passe o aparelho para <span class="prompt-text" id="pass-name"></span></h2>
+      <p class="muted" id="pass-hint"></p>
+      <button class="btn btn-primary" type="button" id="pass-ready"></button>
+    </div>
+
+    <!-- Escrever -->
+    <div class="screen" data-screen="write" hidden>
+      <h2><span id="write-name"></span>, escreva um roteiro</h2>
+      <p class="muted small">Drama, comédia, terror, novela… Outra pessoa vai interpretar.</p>
+      <form class="form" id="write-form">
+        <label>Título
+          <input id="script-title" maxlength="60" placeholder="Ex.: O Último Pão de Queijo" autocomplete="off">
+        </label>
+        <p class="muted small" id="emotion-random-note" hidden>Modo sorteado: a emoção será sorteada para quem interpretar o seu roteiro.</p>
+        <fieldset class="emotion-pick" id="emotion-pick">
+          <legend>Tipo de atuação <span class="muted small">— os outros vão tentar adivinhar!</span></legend>
+          <div class="mode" id="emotion-choices">
+            <label class="vote-option"><input type="radio" name="emotion" value="sad"><span> Triste</span></label>
+            <label class="vote-option"><input type="radio" name="emotion" value="angry"><span>Com raiva</span></label>
+            <label class="vote-option"><input type="radio" name="emotion" value="happy"><span> Feliz</span></label>
+            <label class="vote-option"><input type="radio" name="emotion" value="other"><span> Outra</span></label>
+          </div>
+          <input id="emotion-other" maxlength="30" placeholder="Qual emoção? Ex.: Com medo" autocomplete="off" hidden>
+        </fieldset>
+        <label>Roteiro
+          <textarea id="script-text" maxlength="3000" rows="10" placeholder="MARIA (desesperada): Quem comeu o último pão de queijo?!"></textarea>
+        </label>
+        <div class="row">
+          <span class="muted small" id="script-count">0/3000</span>
+          <button class="btn btn-primary" type="submit">Pronto!</button>
+        </div>
+      </form>
+    </div>
+
+    <!-- Gravar -->
+    <div class="screen" data-screen="perform" hidden>
+      <h2><span id="perform-name"></span>, seu roteiro: <span class="prompt-text" id="perform-title"></span></h2>
+      <p class="emotion-tag"><span id="perform-emotion-label">Atue com a emoção:</span> <strong id="perform-emotion"></strong> <span class="muted small">(segredo!)</span></p>
+      <div class="script-text script-box" id="perform-text"></div>
+
+      <div class="mode" role="radiogroup" aria-label="Tipo de gravação">
+        <button class="btn mode-btn active" type="button" data-mode="audio" role="radio" aria-checked="true"> Só áudio</button>
+        <button class="btn mode-btn" type="button" data-mode="video" role="radio" aria-checked="false">Vídeo</button>
+      </div>
+
+      <div class="stage">
+        <video id="preview" class="performance" muted playsinline autoplay hidden></video>
+        <video id="playback-video" class="performance" controls playsinline hidden></video>
+        <audio id="playback-audio" class="performance" controls hidden></audio>
+        <p class="rec-status" id="rec-status"></p>
+      </div>
+
+      <div class="row">
+        <button class="btn" type="button" id="rec-open">Ativar microfone</button>
+        <button class="btn btn-rec" type="button" id="rec-start" hidden>● Gravar</button>
+        <button class="btn" type="button" id="rec-stop" hidden>■ Parar</button>
+        <button class="btn" type="button" id="rec-redo" hidden>Gravar de novo</button>
+        <button class="btn btn-primary" type="button" id="rec-send" hidden>Usar esta gravação</button>
+        <button class="btn btn-ghost btn-sm" type="button" id="rec-skip">Seguir sem gravar</button>
+      </div>
+    </div>
+
+    <!-- Apresentação -->
+    <div class="screen" data-screen="showcase" hidden>
+      <h2 id="show-title"></h2>
+      <p class="muted" id="show-performer"></p>
+      <div class="stage" id="show-stage"></div>
+      <p class="muted small">Todo mundo assiste junto. Depois, cada um dá seu palpite em segredo.</p>
+      <button class="btn btn-primary" id="show-guess" type="button">Hora dos palpites</button>
+      <div class="row skip-row">
+        <button class="btn btn-ghost btn-sm" id="show-skip" type="button">⏭ Pular esta atuação</button>
+        <button class="btn btn-ghost btn-sm" id="show-skip-all" type="button">⏩ Pular apresentação</button>
+      </div>
+    </div>
+
+    <!-- Palpite individual -->
+    <div class="screen" data-screen="guess" hidden>
+      <h2><span id="guess-name"></span>, qual é a emoção de “<span id="guess-title"></span>”?</h2>
+      <div class="mode" id="guess-options"></div>
+      <details>
+        <summary>Ler o roteiro</summary>
+        <div class="script-text" id="guess-text"></div>
+      </details>
+    </div>
+
+    <!-- Revelação -->
+    <div class="screen" data-screen="reveal" hidden>
+      <h2 id="reveal-title"></h2>
+      <div class="guess">
+        <p class="winner" id="reveal-emotion"></p>
+        <p class="muted small" id="reveal-correct"></p>
+      </div>
+      <details>
+        <summary>Ler o roteiro</summary>
+        <div class="script-text" id="reveal-text"></div>
+      </details>
+      <button class="btn btn-primary" id="reveal-next" type="button"></button>
+    </div>
+
+    <!-- Voto individual -->
+    <div class="screen" data-screen="vote" hidden>
+      <h2><span id="vote-name"></span>, hora de votar!</h2>
+      <form class="form" id="vote-form">
+        <fieldset class="vote-group">
+          <legend>Melhor roteiro</legend>
+          <div id="vote-scripts"></div>
+        </fieldset>
+        <fieldset class="vote-group">
+          <legend> Melhor atuação</legend>
+          <div id="vote-acting"></div>
+        </fieldset>
+        <button class="btn btn-primary" type="submit">Votar</button>
+      </form>
+    </div>
+
+    <!-- Resultado -->
+    <div class="screen" data-screen="results" hidden>
+      <h2>Resultado</h2>
+      <div class="winners" id="winners"></div>
+      <table class="results-table">
+        <thead>
+          <tr><th>Roteiro</th><th>Emoção</th><th>Autor</th><th>Votos</th><th>Ator</th><th>Votos</th></tr>
+        </thead>
+        <tbody id="results-body"></tbody>
+      </table>
+      <h3>Acertos de emoção</h3>
+      <table class="results-table">
+        <thead>
+          <tr><th>Jogador</th><th>Acertos</th></tr>
+        </thead>
+        <tbody id="guess-body"></tbody>
+      </table>
+      <div class="row">
+        <button class="btn" id="again-same" type="button">Jogar de novo (mesmos jogadores)</button>
+        <a class="btn btn-ghost" href="/">Voltar ao início</a>
+      </div>
+    </div>
+  </section>
+</div>
+
+<div class="toast" id="toast" role="status" hidden></div>
+
+<script src="/js/recorder.js"></script>
+<script src="/js/local.js"></script>

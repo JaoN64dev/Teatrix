@@ -1,0 +1,68 @@
+<h1 class="profile-title">{{> avatar item=user.avatar size="lg"}}{{profile.name}}</h1>
+
+<div class="stats">
+  <div class="card stat"><span class="stat-value"> {{profile.coins}}</span><span class="muted small">moedas</span></div>
+  <div class="card stat"><span class="stat-value">{{profile.matches}}</span><span class="muted small">partidas</span></div>
+  <div class="card stat"><span class="stat-value">{{profile.items}}</span><span class="muted small">itens</span></div>
+</div>
+<p class="muted small">Jogando desde {{formatDate profile.since}}</p>
+
+<h2>Meus temas</h2>
+<div class="shop-grid">
+  {{#each themes}}
+    <article class="card shop-item">
+      <div class="swatches" aria-hidden="true">
+        {{#each data.preview}}<span style="background: {{this}}"></span>{{/each}}
+      </div>
+      <h3>{{name}}</h3>
+      {{#if equipped}}
+        <span class="badge">Em uso</span>
+      {{else}}
+        <form method="post" action="/shop/equip/{{key}}">
+          <input type="hidden" name="back" value="profile">
+          <button class="btn btn-sm" type="submit">Usar</button>
+        </form>
+      {{/if}}
+    </article>
+  {{/each}}
+</div>
+
+<h2>Meus avatares</h2>
+<div class="shop-grid">
+  {{#each avatars}}
+    <article class="card shop-item">
+      {{> avatar item=this size="lg"}}
+      <h3>{{name}}</h3>
+      {{#if equipped}}
+        <span class="badge">Em uso</span>
+      {{else}}
+        <form method="post" action="/shop/equip/{{key}}">
+          <input type="hidden" name="back" value="profile">
+          <button class="btn btn-sm" type="submit">Usar</button>
+        </form>
+      {{/if}}
+    </article>
+  {{/each}}
+</div>
+<p><a href="/shop">Mais temas e avatares na loja →</a></p>
+
+<h2 id="recuperacao">🔑 Código de recuperação</h2>
+<section class="card recovery-settings">
+  {{#if profile.hasRecoveryCode}}
+    <p>Você tem um código de recuperação. Se perdeu, gere outro — o anterior deixa de valer.</p>
+  {{else}}
+    <p class="flash flash-error">Sua conta ainda não tem código de recuperação. Sem ele, não dá para recuperar a senha se você esquecer. Gere um agora!</p>
+  {{/if}}
+  <form method="post" action="/account/recovery-code" class="form">
+    <div class="field">
+      <label for="recovery-password">Confirme sua senha atual</label>
+      <div class="password-field">
+        <input id="recovery-password" name="password" type="password" autocomplete="current-password" required maxlength="72">
+        <button class="btn btn-ghost btn-sm pw-toggle" type="button" aria-controls="recovery-password" aria-pressed="false">Mostrar</button>
+      </div>
+    </div>
+    <button class="btn" type="submit">{{#if profile.hasRecoveryCode}}Gerar novo código{{else}}Gerar código{{/if}}</button>
+  </form>
+</section>
+
+<script src="/js/auth.js" defer></script>

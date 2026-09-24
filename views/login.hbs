@@ -1,0 +1,26 @@
+<section class="card auth-card">
+  <h1>Entrar</h1>
+  <p class="muted">Bem-vindo de volta ao palco.</p>
+  <form method="post" action="/login" class="form" data-auth-form>
+    <label>Usuário
+      <input name="username" value="{{old.username}}" autocomplete="username" autocapitalize="none" spellcheck="false"
+        required maxlength="20" {{#unless old.username}}autofocus{{/unless}}>
+    </label>
+    <div class="field">
+      <div class="field-head">
+        <label for="login-password">Senha</label>
+        <a class="small" href="/forgot">Esqueci minha senha</a>
+      </div>
+      <div class="password-field">
+        <input id="login-password" name="password" type="password" autocomplete="current-password" required maxlength="72"
+          {{#if old.username}}autofocus{{/if}}>
+        <button class="btn btn-ghost btn-sm pw-toggle" type="button" aria-controls="login-password" aria-pressed="false">Mostrar</button>
+      </div>
+      <p class="caps-warning small" hidden>⚠️ Caps Lock está ligado</p>
+    </div>
+    <button class="btn btn-primary" type="submit">Entrar</button>
+  </form>
+  <p class="muted small">Ainda não tem conta? <a href="/register">Criar conta</a></p>
+</section>
+
+<script src="/js/auth.js" defer></script>

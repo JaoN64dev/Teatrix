@@ -1,0 +1,29 @@
+<section class="hero">
+  <p class="muted">Cada um escreve um roteiro drama, comédia, novela, o que der na telha. Os roteiros são sorteados, e cada jogador interpreta o de outra pessoa gravando áudio ou vídeo. No final, todo mundo vota no melhor roteiro e na melhor atuação.</p>
+</section>
+
+<h2>Escolha o modo de jogo</h2>
+<div class="modes">
+  <section class="card mode-card">
+    <h2>Online</h2>
+    <p class="muted">Cada jogador no seu aparelho. Vale moedas e fica salvo no histórico.</p>
+
+    <h3>Criar sala</h3>
+    <p class="text">Você será o anfitrião e escolhe os tempos. Chame de 3 a 10 amigos.</p>
+    <form method="post" action="/rooms">
+      <button class="btn btn-primary" type="submit">Criar sala</button>
+    </form>
+
+    <h3>Entrar em uma sala</h3>
+    <form method="post" action="/rooms/join" class="form form-inline">
+      <input name="code" placeholder="CÓDIGO" maxlength="5" required class="code-input" autocomplete="off" aria-label="Código da sala">
+      <button class="btn" type="submit">Entrar</button>
+    </form>
+  </section>
+
+  <section class="card mode-card">
+    <h2>Local</h2>
+    <p class="muted">Um aparelho só, passado de mão em mão ótimo para jogar todo mundo junto. Cada um escreve, grava e dá palpites na sua vez, sem os outros verem. De 3 a 10 jogadores; não vale moedas nem vai para o histórico.</p>
+    <a class="btn btn-primary" href="/local">Jogar no modo local</a>
+  </section>
+</div>

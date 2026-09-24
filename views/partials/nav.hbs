@@ -1,0 +1,26 @@
+<header class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="/">🎭 Teatrix</a>
+    {{#if user}}
+      <nav class="nav-links">
+        <a href="/">Jogar</a>
+        <a href="/shop">Loja</a>
+        <a href="/history">Histórico</a>
+        <a href="/about">Sobre</a>
+        <a class="nav-profile" href="/profile">{{> avatar item=user.avatar size="sm"}}{{user.name}}</a>
+      </nav>
+      <div class="nav-right">
+        <span class="coins" title="Suas moedas">🪙 {{user.coins}}</span>
+        <form method="post" action="/logout">
+          <button class="btn btn-ghost btn-sm" type="submit">Sair</button>
+        </form>
+      </div>
+    {{else}}
+      <nav class="nav-links">
+        <a href="/login">Entrar</a>
+        <a href="/register">Criar conta</a>
+        <a href="/about">Sobre</a>
+      </nav>
+    {{/if}}
+  </div>
+</header>

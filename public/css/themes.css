@@ -1,0 +1,129 @@
+/* Cada tema só redefine as variáveis. O atributo data-theme vem de user.activeTheme. */
+
+/*
+  Cores de texto:
+    --text     texto principal
+    --text2    texto alternativo (classe .text2)
+    --text3    outro destaque (classe .text3)
+    --heading  títulos h1–h3 (padrão: --text)
+    --link     links (padrão: --accent)
+  Todo tema define --text2 e --text3; --heading e --link só se quiser mudar o padrão.
+*/
+:root {
+  --heading: var(--text);
+  --link: var(--accent);
+}
+
+/* Tema padrão (:root): fundo azul-claro, cartões creme com borda amarela, botões azuis. */
+:root,
+[data-theme="azul"] {
+  --bg: #dbeafe;
+  --surface: #fffdf2;
+  --surface-2: #ffec99;
+  --text: #0b2265;
+  --text2: #1f4fd6;
+  --text3: #8a5a00;
+  --muted: #44598f;
+  --border: #f7c600;
+  --accent: #1f4fd6;
+  --accent-text: #ffffff;
+  --success: #237032;
+  --danger: #c92a2a;
+  --shadow: 0 2px 0 rgba(11, 34, 101, 0.12);
+}
+
+[data-theme="claro"] {
+  --bg: #fdf8f0;
+  --surface: #ffffff;
+  --surface-2: #f4ece0;
+  --text: #2b2118;
+  --text2: #b5452a;
+  --text3: #2f6f9f;
+  --muted: #7a6a5c;
+  --border: #e6d9c7;
+  --accent: #e4572e;
+  --accent-text: #ffffff;
+  --success: #2f9e44;
+  --danger: #c92a2a;
+  --shadow: 0 2px 0 rgba(43, 33, 24, 0.08);
+}
+
+[data-theme="escuro"] {
+  --bg: #17151c;
+  --surface: #221f29;
+  --surface-2: #2c2835;
+  --text: #ece8f4;
+  --text2: #ffb38a;
+  --text3: #9ad1ff;
+  --muted: #a29bb3;
+  --border: #3a3545;
+  --accent: #ff7a59;
+  --accent-text: #17151c;
+  --success: #69db7c;
+  --danger: #ff6b6b;
+  --shadow: 0 2px 0 rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="neon"] {
+  --bg: #0b0b1a;
+  --surface: #13132b;
+  --surface-2: #1c1c3d;
+  --text: #e0fbff;
+  --text2: #ff3cf0;
+  --text3: #39ff88;
+  --muted: #8a9cc2;
+  --border: #2f2f6a;
+  --accent: #00f0ff;
+  --accent-text: #0b0b1a;
+  --success: #39ff88;
+  --danger: #ff3c8e;
+  --shadow: 0 0 12px rgba(0, 240, 255, 0.25);
+}
+
+[data-theme="pastel"] {
+  --bg: #fff0f6;
+  --surface: #ffffff;
+  --surface-2: #f8e6ff;
+  --text: #4a3a55;
+  --text2: #b83f7f;
+  --text3: #3f6fb5;
+  --muted: #8c7a99;
+  --border: #ecd3f5;
+  --accent: #b983ff;
+  --accent-text: #ffffff;
+  --success: #52b788;
+  --danger: #e5383b;
+  --shadow: 0 2px 0 rgba(185, 131, 255, 0.2);
+}
+
+[data-theme="teatro"] {
+  --bg: #2a0a10;
+  --surface: #3d0f18;
+  --surface-2: #521422;
+  --text: #f7e7c6;
+  --text2: #f2c14e;
+  --text3: #e8a0a0;
+  --muted: #cfa98a;
+  --border: #6b1d2c;
+  --accent: #d4a017;
+  --accent-text: #2a0a10;
+  --success: #8fd694;
+  --danger: #ff8a80;
+  --shadow: 0 2px 0 rgba(0, 0, 0, 0.35);
+}
+
+[data-theme="retro"] {
+  --bg: #f4e9d8;
+  --surface: #fffaf0;
+  --surface-2: #eadbc2;
+  --text: #3a2e39;
+  --text2: #a8481f;
+  --text3: #1b6f8b;
+  --muted: #7d6b72;
+  --border: #d9c4a3;
+  --accent: #1b998b;
+  --accent-text: #ffffff;
+  --success: #3d9970;
+  --danger: #d7263d;
+  --shadow: 3px 3px 0 #3a2e39;
+}

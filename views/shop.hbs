@@ -1,0 +1,48 @@
+<h1>Loja</h1>
+<p class="muted">Ganhe moedas jogando: 10 por partida, +5 para o anfitrião e +25 por vitória (melhor roteiro ou melhor atuação).</p>
+
+<h2>Temas</h2>
+<div class="shop-grid">
+  {{#each themes}}
+    <article class="card shop-item">
+      <div class="swatches" aria-hidden="true">
+        {{#each data.preview}}<span style="background: {{this}}"></span>{{/each}}
+      </div>
+      <h3>{{name}}</h3>
+      <p class="muted small">{{description}}</p>
+      {{#if equipped}}
+        <span class="badge">Em uso</span>
+      {{else if owned}}
+        <form method="post" action="/shop/equip/{{key}}">
+          <button class="btn btn-sm" type="submit">Usar</button>
+        </form>
+      {{else}}
+        <form method="post" action="/shop/buy/{{key}}">
+          <button class="btn btn-sm btn-primary" type="submit" {{#unless affordable}}disabled{{/unless}}>🪙 {{price}}</button>
+        </form>
+      {{/if}}
+    </article>
+  {{/each}}
+</div>
+
+<h2>Avatares</h2>
+<div class="shop-grid">
+  {{#each avatars}}
+    <article class="card shop-item">
+      {{> avatar item=this size="lg"}}
+      <h3>{{name}}</h3>
+      <p class="muted small">{{description}}</p>
+      {{#if equipped}}
+        <span class="badge">Em uso</span>
+      {{else if owned}}
+        <form method="post" action="/shop/equip/{{key}}">
+          <button class="btn btn-sm" type="submit">Usar</button>
+        </form>
+      {{else}}
+        <form method="post" action="/shop/buy/{{key}}">
+          <button class="btn btn-sm btn-primary" type="submit" {{#unless affordable}}disabled{{/unless}}>🪙 {{price}}</button>
+        </form>
+      {{/if}}
+    </article>
+  {{/each}}
+</div>
